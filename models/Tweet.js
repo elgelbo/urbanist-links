@@ -2,13 +2,12 @@ var mongoose = require('mongoose');
 
 // Create a new schema for our tweet data
 var schema = new mongoose.Schema({
-    twid       : String
-  , active     : Boolean
-  , author     : String
-  , avatar     : String
-  , body       : String
-  , date       : Date
-  , screenname : String
+    twid: String,
+    author: String,
+    body: String,
+    date: Date,
+    urls: [String],
+    score: Number
 });
 
 // Create a static getTweets method to return tweet data from the db

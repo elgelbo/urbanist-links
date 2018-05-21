@@ -52,7 +52,6 @@ ids.getStreamIDs().then(function(members) {
   }, function(stream) {
     stream.on('data', function(event) {
       streamHandler(event, io);
-      console.log(event);
     });
     stream.on('error', function(error) {
       throw error;
