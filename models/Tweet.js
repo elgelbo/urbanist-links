@@ -7,7 +7,8 @@ var schema = new mongoose.Schema({
     body: String,
     date: Date,
     urls: [String],
-    score: Number
+    score: Number,
+    top10: Boolean
 });
 
 // Create a static getTweets method to return tweet data from the db
