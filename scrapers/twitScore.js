@@ -53,6 +53,7 @@ async function go() {
       score: -1
     });
     console.log(top);
+    bestOf();
     mongoose.connection.close();
   } catch (e) {
     console.error(e); // 💩
@@ -85,4 +86,3 @@ async function bestOf() {
     mongoose.connection.close();
   }
 }
-bestOf();
