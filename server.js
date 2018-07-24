@@ -50,7 +50,6 @@ io.on('connection', function (socket) {
 ids.getStreamIDs().then(function (members) {
   twit.stream('statuses/filter', { follow: members }, function (stream) {
     stream.on('data', function (event) {
-      // console.log(event && event.text);
       streamHandler(event, io);
     });
     stream.on('error', function (error) {

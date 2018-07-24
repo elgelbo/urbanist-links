@@ -47,7 +47,6 @@ async function go() {
         const twt = await Tweet.findOneAndUpdate({
           twid: tweet.id_str
         }, { 'score': Number.parseFloat(score)})
-        console.log(twt);
       });
     }
     const top = await Tweet.find({}).limit(10).sort({
