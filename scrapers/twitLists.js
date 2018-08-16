@@ -6,8 +6,11 @@ var
   mongoose = require('mongoose'),
   moment = require('moment'),
   config = require('../config'),
-  List = require('../models/List');
-
+  List = require('../models/List'),
+  Tweet = require('../models/Tweet');
+  mongoose.Promise = global.Promise; //USE ES6 PROMISES see:http://mongoosejs.com/docs/promises.html#plugging-in-your-own-promises-library
+  
+  
 mongoose.Promise = global.Promise; //USE ES6 PROMISES see:http://mongoosejs.com/docs/promises.html#plugging-in-your-own-promises-library
 
 // Connect to our mongo database
