@@ -10,6 +10,7 @@ var express = require('express'),
   ids = require('./utils/idHandler'),
   config = require('./config'),
   streamHandler = require('./utils/streamHandler'),
+  Twitter = require('twitter'),
   errorHandlers = require('./handlers/errorHandlers');
 
 mongoose.Promise = global.Promise; //USE ES6 PROMISES see:http://mongoosejs.com/docs/promises.html#plugging-in-your-own-promises-library
@@ -57,12 +58,13 @@ if (app.get('env') === 'development') {
 // production error handler
 app.use(errorHandlers.productionErrors);
 
+var twit = new Twitter(config.twitter);
+
 // Initialize socket.io
 var io = require('socket.io').listen(server);
 io.on('connection', function (socket) {
   console.log('a user connected');
 });
-
 ids.getStreamIDs().then(function (members) {
   twit.stream('statuses/filter', { follow: members }, function (stream) {
     stream.on('data', function (event) {

@@ -612,7 +612,7 @@ eval("// removed by extract-text-webpack-plugin\n\n//# sourceURL=webpack:///./sr
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\n__webpack_require__(/*! ./app.css */ \"./src/app.css\");\n\nconsole.log(\"hello world!\");\nvar io = __webpack_require__(/*! socket.io-client */ \"./node_modules/socket.io-client/lib/index.js\");\nvar socket = io();\nsocket.on('news', function (data) {\n  console.log(data);\n});\n\nvar element = '\\n  <div class=\"element\">\\n    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur laudantium recusandae itaque libero velit minus ex reiciendis veniam. Eligendi modi sint delectus beatae nemo provident ratione maiores, voluptatibus a tempore!</p>\\n  </div>\\n';\n\ndocument.write(element);\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("\n\n__webpack_require__(/*! ./app.css */ \"./src/app.css\");\n\nconsole.log(\"hello world!\");\nvar io = __webpack_require__(/*! socket.io-client */ \"./node_modules/socket.io-client/lib/index.js\");\nvar socket = io();\nsocket.on('news', function (data) {\n  console.log(data);\n});\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ }),
 
