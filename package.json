@@ -2,29 +2,35 @@
   "name": "thestream",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "private": true,
   "scripts": {
-    "watch": "watchify app.js -o public/js/bundle.js -v",
-    "browserify": "browserify app.js | uglifyjs > public/js/bundle.js",
-    "build": "npm run browserify ",
-    "start": "npm run watch & nodemon server.js"
+    "start": "nodemon server.js",
+    "clean": "rm public/js/bundle.js",
+    "build": "npx webpack --mode development --config webpack.config.js",
+    "watch": "npm run build && npm run start"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
+    "express-validator": "^5.3.0",
     "moment": "^2.22.1",
     "mongoose": "^5.1.0",
     "pug": "^2.0.3",
     "socket.io": "^2.1.0",
-    "socket.io-client": "^2.1.1",
     "twitter": "^1.7.1"
   },
   "devDependencies": {
-    "browserify": "^16.2.2",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "css-loader": "^1.0.0",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "nodemon": "^1.17.4",
-    "uglify-js": "^3.3.24",
-    "watchify": "^3.11.0"
+    "style-loader": "^0.21.0",
+    "webpack": "^4.16.2",
+    "webpack-cli": "^3.1.0"
   }
 }
