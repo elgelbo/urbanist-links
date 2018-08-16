@@ -7,13 +7,13 @@ mongoose.Promise = global.Promise; //USE ES6 PROMISES see:http://mongoosejs.com/
 
 
 // GLOBAL
-router.get('/',  (req, res) => {
-  Tweet.getTweets(0,0, function(tweets) {
-    res.render('home', {tweets: JSON.stringify(tweets)});
-  });
-});
+// router.get('/',  (req, res) => {
+//   Tweet.getTweets(0,0, function(tweets) {
+//     res.render('home', {tweets: JSON.stringify(tweets)});
+//   });
+// });
 
-router.get('/tweets',  async (req, res) => {
+router.get('/',  async (req, res) => {
   try {
     const top = await Tweet.find({}).limit(10).sort({
       score: -1
