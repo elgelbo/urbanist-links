@@ -43,17 +43,17 @@ app.use("/", express.static(__dirname + "/public/"));
 
 // Initialize socket.io
 var io = require('socket.io').listen(server);
-io.on('connection', function(socket) {
+io.on('connection', function (socket) {
   console.log('a user connected');
 });
-ids.getStreamIDs().then(function(members) {
-  twit.stream('statuses/filter', {
-    follow: members
-  }, function(stream) {
-    stream.on('data', function(event) {
+
+ids.getStreamIDs().then(function (members) {
+  twit.stream('statuses/filter', { follow: members }, function (stream) {
+    stream.on('data', function (event) {
+      // console.log(event && event.text);
       streamHandler(event, io);
     });
-    stream.on('error', function(error) {
+    stream.on('error', function (error) {
       throw error;
     });
   });

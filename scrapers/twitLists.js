@@ -53,6 +53,7 @@ async function go(handle) {
         u.push(user.id_str)
       })
     });
+    console.log(u);
     const list = await List.findOneAndUpdate({
       user: handle
     }, {
@@ -73,31 +74,31 @@ var handle = 'Matt_Gelbman';
 
 go(handle);
 
-async function delOld() {
-  try {
-    const bottom = await Tweet.find({
-      top10: null
-    });
-    await asyncForEach(bottom, async (tweet) => {
-      var created = moment(tweet.date);
-      var now = moment(now);
-      var weekAgo = now.subtract(7, 'days');
-      if (created.isBefore(weekAgo, 'week') === true) {
-        console.log('me is true');
-      } else {
-        console.log('falsey falsey');
-        console.log(tweet.twid);
-        var doc = await Tweet.findOneAndDelete({
-          twid: tweet.twid
-        });
-        // var doc = Tweet.findOneAndRemove({'twid': tweet.twid});
-        console.log(doc);
-      }
-    });
-    mongoose.connection.close();
-  } catch (e) {
-    console.error(e); // 💩
-    mongoose.connection.close();
-  }
-}
-delOld();
+// async function delOld() {
+//   try {
+//     const bottom = await Tweet.find({
+//       top10: null
+//     });
+//     await asyncForEach(bottom, async (tweet) => {
+//       var created = moment(tweet.date);
+//       var now = moment(now);
+//       var weekAgo = now.subtract(7, 'days');
+//       if (created.isBefore(weekAgo, 'week') === true) {
+//         console.log('me is true');
+//       } else {
+//         console.log('falsey falsey');
+//         console.log(tweet.twid);
+//         var doc = await Tweet.findOneAndDelete({
+//           twid: tweet.twid
+//         });
+//         // var doc = Tweet.findOneAndRemove({'twid': tweet.twid});
+//         console.log(doc);
+//       }
+//     });
+//     mongoose.connection.close();
+//   } catch (e) {
+//     console.error(e); // 💩
+//     mongoose.connection.close();
+//   }
+// }
+// delOld();
