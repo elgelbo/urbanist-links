@@ -28,6 +28,25 @@ async function asyncForEach(array, callback) {
   }
 }
 
+
+async function bestOf(top) {
+  try {
+    await asyncForEach(top, async (tweet) => {
+      const list = await Tweet.findOneAndUpdate({
+        twid: tweet.twid
+      }, {
+        top10: true
+      }, {
+        upsert: true
+      }).exec();
+    });
+    mongoose.connection.close();
+  } catch (e) {
+    console.error(e); // 💩
+    mongoose.connection.close();
+  }
+}
+
 async function go() {
   try {
     const tweets = await Tweet.find({});
@@ -52,37 +71,15 @@ async function go() {
     const top = await Tweet.find({}).limit(10).sort({
       score: -1
     });
-    console.log(top);
-    bestOf();
-    mongoose.connection.close();
+    bestOf(top);
+    // mongoose.connection.close();
   } catch (e) {
     console.error(e); // 💩
     mongoose.connection.close();
   }
 }
-// var handle = 'Matt_Gelbman';
 
 go();
 
 
 
-async function bestOf() {
-  try {
-    const top = await Tweet.find({}).limit(10).sort({
-      score: -1
-    });
-    await asyncForEach(top, async (tweet) => {
-      const list = await Tweet.findOneAndUpdate({
-        twid: tweet.twid
-      }, {
-        top10: true
-      }, {
-        upsert: true
-      }).exec();
-    });
-    mongoose.connection.close();
-  } catch (e) {
-    console.error(e); // 💩
-    mongoose.connection.close();
-  }
-}
