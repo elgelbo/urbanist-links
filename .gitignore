@@ -1,6 +1,5 @@
 *.env
-node_modules/*
-<<<<<<< HEAD
-public/
-=======
->>>>>>> weback instead of browserify
+/node_modules
+/.cache
+/public
+/_archive
