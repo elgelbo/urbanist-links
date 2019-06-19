@@ -1,14 +1,14 @@
 {
-  "name": "parcel-example",
-  "version": "1.0.0",
+  "name": "tweet-stream",
+  "version": "1.1.0",
   "description": "",
   "main": "start.js",
   "scripts": {
     "dev": "concurrently \"npm:watch\" \"npm:build-watch\"",
     "start": "node start",
     "watch": "nodemon --ignore src/ --ignore public/ start",
-    "build-watch": "parcel watch ./src/scripts/test.js -d public",
-    "build": "parcel build ./src/scripts/test.js -d public/js"
+    "build-watch": "parcel watch ./src/main.js -d public",
+    "build": "parcel build ./src/main.js -d public/js"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +17,7 @@
     "express": "^4.17.1",
     "mongoose": "^5.6.0",
     "pug": "^2.0.4",
+    "socket.io": "^2.2.0",
     "twitter": "^1.7.1"
   },
   "devDependencies": {
