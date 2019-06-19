@@ -21,10 +21,10 @@ const server = app.listen(app.get('port'), () => {
 const io = require('socket.io')(server);
 
 var client = new Twitter({
-  consumer_key: '81mgcaZfRjMs7d5ouASM4OOW7',
-  consumer_secret: 'Qrlz323G4i2hLnhuOx1IDCAUsT0YjWdmHJCHfpt8v4n5N5xPel',
-  access_token_key: '1433866686-3JH42zlnHj1eup6aAlr7IRNgjg3KDM5UXbZtetP',
-  access_token_secret: 'eySak7lkqT70G2uDImgWRYWGAPgLGrYkcvks5icwviMyH'
+  consumer_key: process.env.TWITTER_CONSUMER_KEY,
+  consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+  access_token_key: process.env.TWITTER_ACCESSS_TOKEN_KEY,
+  access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 });
 
 const stream = client.stream('statuses/filter', { track: 'nodejs,angular' });
