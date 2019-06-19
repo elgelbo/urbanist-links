@@ -1,7 +1,7 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
-const Twitter = require('twitter')
-
+const Twitter = require('twitter');
+const processTweets = require('./utils/processTweets');
 // IMPORT MONGOOSE
 
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, promiseLibrary: global.Promise}).then(
@@ -18,6 +18,8 @@ const server = app.listen(app.get('port'), () => {
   console.log(`👂 on PORT ${server.address().port}`);
 });
 
+// STREAM BUSINESS
+
 const io = require('socket.io')(server);
 
 var client = new Twitter({
@@ -29,10 +31,21 @@ var client = new Twitter({
 
 const stream = client.stream('statuses/filter', { track: 'nodejs,angular' });
 
-stream.on('data', function(event) {
-  console.log(event && event.text);
-  io.emit('tweets', event);
+// stream.on('data', function (event) {
+//   const info = processTweets.streamHandler(event);
+//   io.emit('tweets', info);
+// });
+
+stream.on('data', function (event) {
+  processTweets.streamHandler(event, io);
 });
+
+stream.on('error', function (error) {
+  throw error;
+});
+
+
+
 
 stream.on('error', function(error) {
   throw error;
