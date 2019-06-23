@@ -1,52 +1,28 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
-const Twitter = require('twitter');
-const processTweets = require('./utils/processTweets');
-// IMPORT MONGOOSE
+const tweets = require('./utils/tweets');
+ids = require('./utils/idHandler')
 
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, promiseLibrary: global.Promise}).then(
   () => { console.log('🔗 👌 🔗 👌 🔗 👌 🔗 👌 Mongoose connection open.') },
   err => { console.error(`🙅 🚫 🙅 🚫 🙅 🚫 🙅 🚫 → ${err.message}`) }
 );
 // IMPORT MODELS
+require('./models/List');
+require('./models/Tweet');
 
 // START APP
 const app = require('./app')
+
 app.set('port', process.env.PORT || 7777 )
 
 const server = app.listen(app.get('port'), () => {
   console.log(`👂 on PORT ${server.address().port}`);
 });
 
-// STREAM BUSINESS
-
+// INIT SOCKET
 const io = require('socket.io')(server);
 
-var client = new Twitter({
-  consumer_key: process.env.TWITTER_CONSUMER_KEY,
-  consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-  access_token_key: process.env.TWITTER_ACCESSS_TOKEN_KEY,
-  access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
-});
-
-const stream = client.stream('statuses/filter', { track: 'nodejs,angular' });
-
-// stream.on('data', function (event) {
-//   const info = processTweets.streamHandler(event);
-//   io.emit('tweets', info);
-// });
-
-stream.on('data', function (event) {
-  processTweets.streamHandler(event, io);
-});
-
-stream.on('error', function (error) {
-  throw error;
-});
-
-
-
-
-stream.on('error', function(error) {
-  throw error;
+ids.getStreamIDs().then(function (members) {
+  tweets.createStream(io, members);
 });

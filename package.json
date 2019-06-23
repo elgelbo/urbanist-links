@@ -8,7 +8,8 @@
     "start": "node start",
     "watch": "nodemon --ignore src/ --ignore public/ start",
     "build-watch": "parcel watch ./src/main.js -d public",
-    "build": "parcel build ./src/main.js -d public/js"
+    "build": "parcel build ./src/main.js -d public/js",
+    "postinstall": "npm run build"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +17,7 @@
   "dependencies": {
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
+    "moment": "^2.24.0",
     "mongoose": "^5.6.0",
     "pug": "^2.0.4",
     "socket.io": "^2.2.0",
